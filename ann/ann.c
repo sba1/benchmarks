@@ -144,6 +144,12 @@ float dotp(const float *a, const float *b, int size)
   sum = _mm_hadd_ps(sum, sum);
   sum = _mm_hadd_ps(sum, sum);
 
+  /* Sum up remainder if any */
+  for (int i = size / 4 * 4; i < size; i++)
+  {
+    sum[0] += a[i] * b[i];
+  }
+
   return sum[0];
 #elif defined(USE_DP_INTRINSICS)
   __m128 *ma = (__m128 *)a, *mb=(__m128 *)b;
@@ -154,6 +160,12 @@ float dotp(const float *a, const float *b, int size)
     /* Needs at least SSE4 */
     __m128 dp = _mm_dp_ps(ma[i], mb[i], 0xf1);
     sum += dp[0];
+  }
+
+  /* Sum up remainder if any */
+  for (int i = size / 4 * 4; i < size; i++)
+  {
+    sum += a[i] * b[i];
   }
   return sum;
 #else
