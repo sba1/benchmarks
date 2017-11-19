@@ -1,3 +1,15 @@
+#
+# This makefile contains the rules to compile different flavors of the
+# ann.c source code.
+#
+# In order to test a new flavor, add a new target and define a corresponding
+# CFLAGS marco that contains the special compiler flags. Use macros inside
+# the code and the -D switch to test diferent code implementations.
+#
+# Currently, support for x86_64 and armv7l (cortex-a53 on the raspberry pi 3)
+# is built in.
+#
+
 TARGETS = ann1 ann2 ann3 ann4 ann5 ann6
 
 CFLAGS = -std=c11 -Wall
