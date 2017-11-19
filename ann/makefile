@@ -53,7 +53,7 @@ endif
 all: $(TARGETS)
 
 # Macro to compile a flavor of ann
-define cc_ann =
+define cc_ann
 $(1): ann.c
 	gcc $(CFLAGS) $$< -o $$@ $(CFLAGS$(1:ann%=%)) -DCFLAGS='"$(CFLAGS$(1:ann%=%))"' -lm
 endef
